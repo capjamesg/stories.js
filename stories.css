@@ -1,0 +1,35 @@
+
+#story img {
+    max-height: 90vh;
+    max-width: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+#story .story {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a1a1a;
+}
+.image_counts {
+    position: absolute;
+    top: 40px;
+}
+.image_count {
+    display: inline-block;
+    height: 5px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin: 0 5px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+}
+#close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
