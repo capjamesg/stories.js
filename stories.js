@@ -79,6 +79,13 @@ class Stories extends HTMLElement {
                 this.close();
             }
         });
+
+        // press escape key to close
+        document.addEventListener("keydown", (e) => {
+            if (e.keyCode == 27) {
+                this.close();
+            }
+        });
     }
 
     transition (featuredImage, direction = "forward") {
