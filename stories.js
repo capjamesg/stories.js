@@ -116,7 +116,7 @@ class Stories extends HTMLElement {
             this.close();
         }
 
-        featuredImage.src = images[next_image];
+        featuredImage.src = flat_images[next_image];
 
         for (var i = 0; i < images.length; i++) {
             var image_count = this.shadowRoot.querySelector('#image_count_' + i);
@@ -188,3 +188,6 @@ class Stories extends HTMLElement {
 }
 
 customElements.define('html-story', Stories);
+
+// write an nginx header to set cors for /openstories.json
+//   add_header 'Access-Control-Allow-Origin' '*';
