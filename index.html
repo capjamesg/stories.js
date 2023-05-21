@@ -7,6 +7,9 @@
         
         <title>stories.js: A Stories Web Component</title>
 
+        <meta name="description" content="stories.js is a Web Component that allows you to create stories on your website. " />
+        <meta property="og:image" content="https://screenshot.jamesg.blog/?url=https://capjamesg.github.io/stories.js/" />
+
         <style>
             html, body {
                 font-family: sans-serif;
@@ -84,6 +87,46 @@
                 margin: 1em 0;
             }
         </style>
+        <script>
+            var images = [
+                ["https://jamesg.blog/assets/paintedladies.jpeg", ""],
+                ["https://jamesg.blog/assets/paintedladies.jpeg", ""],
+                ["https://jamesg.blog/assets/paintedladies.jpeg", ""],
+            ];
+            
+            function parseOpenStories (url) {
+                fetch(url)
+                    .then(function (response) {
+                        response.json().then(function (data) {
+                            var items = data.items;
+
+                            var images = [];
+
+                            for (var i = 0; i < items.length; i++) {
+                                var item = items[i];
+
+                                var image = item._open_stories.url;
+                                var alt = item._open_stories.alt || "";
+
+                                images.push([image, alt]);
+                            }
+
+                            console.log(images);
+
+                            return images;
+                        });
+                    });
+            }
+
+            // when loaded, replace images
+            
+            // var htmlStory = document.querySelector('html-story');
+
+            // htmlStory.images = images;
+
+            // // only load
+            
+        </script>
     </head>
     <body>
         <nav>
@@ -92,15 +135,6 @@
                 <li><a href="https://jamesg.blog">Made by capjamesg</a></li>
             </ul>
         </nav>
-        <script>
-            var images = [
-                ["file:///Users/james/Downloads/capjamesg_20230517/media/stories/202302/333212031_197674712847569_3642338757923005192_n_17954847071296869.jpg"],
-                ["file:///Users/james/Downloads/capjamesg_20230517/media/stories/202301/325216297_867619227773862_2031824712535736069_n_17962238882076824.jpg"],
-                ["file:///Users/james/Downloads/capjamesg_20230517/media/stories/202301/325293929_128368476790103_6117514566283872092_n_17978465563809272.jpg"]
-            ];
-        </script>
-
-        <script src="stories.js"></script>
 
         <template>
             <link rel="stylesheet" href="stories.css">
@@ -143,7 +177,6 @@ var images = [
     &lt;link rel="stylesheet" href="stories.css"&gt;
 &lt;/template&gt;
 
-&lt;html-story&gt;&lt;/html-story&gt;
 
 &lt;script src="stories.js"&gt;&lt;/script&gt;
             </code></pre>
@@ -157,5 +190,7 @@ var images = [
                 <p>stories.js was made with ❤️, 🧇 and ☕️ by <a href="https://jamesg.blog">capjamesg</a>. <a href="https://github.com/capjamesg/stories.js">View Source</a>.</p>
             </footer>
         </main>
+
+        <script src="stories.js" defer></script>
     </body>
 </html>

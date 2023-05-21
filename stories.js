@@ -61,6 +61,7 @@ class Stories extends HTMLElement {
             if (e.keyCode == 13 || e.keyCode == 37) {
                 this.transition(featuredImage);
             }
+            // on left, 
             if (e.keyCode == 39) {
                 this.transition(featuredImage, "back");
             }
