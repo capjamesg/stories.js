@@ -86,13 +86,46 @@
                 border-radius: 0.25em;
                 margin: 1em 0;
             }
+            #stories_list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid lightgrey;
+                border-radius: 0.25em;
+            }
+            .story_list_items {
+                border-radius: 0.25em;
+                overflow: hidden;
+                margin: 1em;
+                text-align: center;
+                margin-bottom: 0;
+            }
+            .story_list_items p {
+                margin-top: 0;
+            }
+            .story_list_item img, .story_list_items img {
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+            }
         </style>
         <script>
-            var images = [
-                ["https://jamesg.blog/assets/paintedladies.jpeg", ""],
-                ["https://jamesg.blog/assets/paintedladies.jpeg", ""],
-                // ["https://jamesg.blog/assets/paintedladies.jpeg", ""],
-            ];
+            var imageManifest = {
+                "San Francisco": [
+                    ["https://jamesg.blog/assets/paintedladies.jpeg", ""],
+                    ["https://jamesg.blog/assets/sfbay.jpg", ""],
+                    ["https://raw.githubusercontent.com/capjamesg/airport-pianos/main/screenshot.png", ""]
+                ],
+                "USA": [
+                    ["https://jamesg.blog/assets/sfbay.jpg", ""],
+                    ["https://raw.githubusercontent.com/capjamesg/airport-pianos/main/screenshot.png", ""],
+                    ["https://jamesg.blog/assets/paintedladies.jpeg", ""]
+                ],
+
+            };
+
+            // var images = imageManifest["Coffees"];
             
             function parseOpenStories (url) {
                 fetch(url)
@@ -117,15 +150,6 @@
                         });
                     });
             }
-
-            // when loaded, replace images
-            
-            // var htmlStory = document.querySelector('html-story');
-
-            // htmlStory.images = images;
-
-            // // only load
-            
         </script>
     </head>
     <body>
@@ -138,6 +162,15 @@
 
         <template>
             <link rel="stylesheet" href="stories.css">
+
+            <style>
+                #image_canvas {
+                    position: absolute;
+                    z-index: 1002;
+                    height: 600px;
+                    width: 337px;
+                }
+            </style>
         </template>
 
         <html-story></html-story>
@@ -147,6 +180,10 @@
 
             <p><code>stories.js</code> is a Web Component that allows you to create stories on your website.</p>
 
+            <h2>Example</h2>
+            
+            <div id="stories_list"></div>
+
             <h2>How it Works</h2>
 
             <p>To advance a story, you can click on either the story image or use the right keyboard arrow.</p>
@@ -155,7 +192,7 @@
 
             <p>When all stories have been viewed, or when the user clicks the <code>X</code> button, the stories will close.</p>
 
-            <p class="callout" onclick="document.querySelector('html-story').show()">Click here to see an example</p>
+            <h2>Project Screenshot</h2>
 
             <img src="https://capjamesg.github.io/stories.js/stories.png" alt="Screenshot of stories.js displaying a story" id="display_image" />
 
@@ -192,15 +229,52 @@ var images = [
             </footer>
         </main>
 
-        <div class="story_list"></div>
-
         <script src="stories.js"></script>
-        <!-- <script>
-            // show story
-            document.querySelector('html-story').show();
-        </script> -->
+
         <script>
-            for i in 
+            // create stories_list for each story
+            var storiesList = document.querySelector('#stories_list');
+
+            for (var key in imageManifest) {
+                var storyList = document.createElement('div');
+
+                var storyListTitle = document.createElement('p');
+                storyListTitle.innerText = key;
+
+                var firstImage = imageManifest[key][0][0];
+
+                var storyListItem = document.createElement('div');
+
+                storyListItem.classList.add('story_list_items');
+                
+                var storyListItemImage = document.createElement('img');
+
+                storyListItemImage.src = firstImage;
+
+                storyListItem.appendChild(storyListItemImage);
+
+                // onclick, show story
+                storyListItem.addEventListener("click", function () {
+                    var storyList = this.parentElement;
+                    var storyListTitle = storyList.querySelector('p');
+                    var storyListTitleText = storyListTitle.innerText;
+
+                    var all_images = imageManifest[storyListTitleText];
+
+                    var htmlStory = document.querySelector('html-story');
+
+                    htmlStory.images = all_images;
+
+                    htmlStory.show();
+                });
+
+                // add title
+                storyListItem.appendChild(storyListTitle);
+
+                storyList.appendChild(storyListItem);
+                
+                storiesList.appendChild(storyList);
+            }
         </script>
     </body>
 </html>
