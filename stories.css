@@ -1,4 +1,11 @@
-
+#story {
+    /* // overlay */
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
 #story img {
     max-height: 90vh;
     max-width: 500px;

@@ -41,9 +41,9 @@ class Stories extends HTMLElement {
             this.transition(featuredImage);
         });
 
-        // on tab
+        // on left / right
         featuredImage.addEventListener("keydown", (e) => {
-            if (e.keyCode == 13) {
+            if (e.keyCode == 13 || e.keyCode == 37) {
                 this.transition(featuredImage);
             }
         });
@@ -56,25 +56,34 @@ class Stories extends HTMLElement {
 
         // click background but not image
         story.addEventListener("click", (e) => {
-            console.log(e.target);
             if (e.target == this.shadowRoot.querySelector('#storyContainer')) {
+                this.close();
+            }
+        });
+        
+        story.addEventListener("click", (e) => {
+            if (e.target == this.shadowRoot.querySelector('#close')) {
                 this.close();
             }
         });
     }
 
-    transition (featuredImage) {
-        var image_counts = this.shadowRoot.querySelector('.image_counts');
+    transition (featuredImage, direction = "forward") {
         var image_count = this.shadowRoot.querySelector('.image_count');
 
         image_count.style.opacity = 0.5;
 
         var current_image = images.indexOf(featuredImage.src);
 
-        var next_image = current_image + 1;
+        if (direction == "forward") {
+            var next_image = current_image + 1;
+        } else {
+            var next_image = current_image - 1;
+        }
 
         if (next_image == images.length) {
             next_image = 0;
+            this.close();
         }
 
         featuredImage.src = images[next_image];
