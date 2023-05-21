@@ -75,6 +75,14 @@
                 justify-content: center;
                 background-color: lavender;
             }
+            a {
+                text-decoration: none;
+            }
+            #display_image {
+                max-width: 100%;
+                border-radius: 0.25em;
+                margin: 1em 0;
+            }
         </style>
     </head>
     <body>
@@ -86,9 +94,9 @@
         </nav>
         <script>
             var images = [
-                "file:///Users/james/Downloads/capjamesg_20230517/media/stories/202302/333212031_197674712847569_3642338757923005192_n_17954847071296869.jpg",
-                "file:///Users/james/Downloads/capjamesg_20230517/media/stories/202301/325216297_867619227773862_2031824712535736069_n_17962238882076824.jpg",
-                "file:///Users/james/Downloads/capjamesg_20230517/media/stories/202301/325293929_128368476790103_6117514566283872092_n_17978465563809272.jpg"
+                ["file:///Users/james/Downloads/capjamesg_20230517/media/stories/202302/333212031_197674712847569_3642338757923005192_n_17954847071296869.jpg"],
+                ["file:///Users/james/Downloads/capjamesg_20230517/media/stories/202301/325216297_867619227773862_2031824712535736069_n_17962238882076824.jpg"],
+                ["file:///Users/james/Downloads/capjamesg_20230517/media/stories/202301/325293929_128368476790103_6117514566283872092_n_17978465563809272.jpg"]
             ];
         </script>
 
@@ -105,9 +113,17 @@
 
             <p><code>stories.js</code> is a Web Component that allows you to create stories on your website.</p>
 
+            <h2>How it Works</h2>
+
+            <p>To advance a story, you can click on either the story image or use the right keyboard arrow.</p>
+
+            <p>To move back a story, you can use the left keyboard arrow.</p>
+
+            <p>When all stories have been viewed, or when the user clicks the <code>X</code> button, the stories will close.</p>
+
             <p class="callout" onclick="document.querySelector('html-story').show()">Click here to see an example</p>
 
-            <h2></h2>
+            <img src="https://capjamesg.github.io/stories.js/stories.png" alt="Screenshot of stories.js displaying a story" id="display_image" />
 
             <h2>Installation</h2>
 
