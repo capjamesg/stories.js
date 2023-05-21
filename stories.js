@@ -28,7 +28,7 @@ class Stories extends HTMLElement {
 
         // image counts width should be img_width + 3px margin
 
-        image_counts.style.width = 300px;
+        image_counts.style.width = "300px";
 
         for (var i = 0; i < img_count; i++) {
             var span = document.createElement('span');
