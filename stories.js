@@ -28,7 +28,7 @@ class Stories extends HTMLElement {
 
         // image counts width should be img_width + 3px margin
 
-        image_counts.style.width = img_count * 100 + 'px';
+        image_counts.style.width = 300px;
 
         for (var i = 0; i < img_count; i++) {
             var span = document.createElement('span');
@@ -79,22 +79,9 @@ class Stories extends HTMLElement {
                 this.close();
             }
         });
-
-        var auto_scroll_duration = 5;
-        
-        if (this.getAttribute("auto-scroll") && !openStories) {
-            auto_scroll_duration = this.getAttribute("auto-scroll");
-        } else if (openStories) {
-            auto_scroll_duration = openStories[images[0]]["duration"];
-        }
-
-        setInterval(() => {
-            this.transition(featuredImage);
-        }, auto_scroll_duration * 1000);
     }
 
     transition (featuredImage, direction = "forward") {
-        console.log("transitioning");
         var image_count = this.shadowRoot.querySelector('.image_count');
 
         image_count.style.opacity = 0.5;
