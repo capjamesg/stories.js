@@ -120,30 +120,19 @@ class Stories extends HTMLElement {
         var next_image_count = this.shadowRoot.querySelector('#image_count_' + next_image);
 
         next_image_count.style.opacity = 1;
-        
-        if (this.getAttribute("auto-scroll") && !this.openStories) {
-            var auto_scroll_duration = this.getAttribute("auto-scroll");
-
-            setInterval(() => {
-                this.transition(featuredImage);
-            }, auto_scroll_duration * 1000);
-        } else if (this.openStories) {
-            var auto_scroll_duration = this.openStories[images[0][0]]["duration"];
-
-            setInterval(() => {
-                this.transition(featuredImage);
-            }, auto_scroll_duration * 1000);
-        }
     }
 
     show () {
         var story = this.shadowRoot.querySelector('#story');
         story.style.display = 'block';
+        autoScrollListener();
     }
 
     close () {
         var story = this.shadowRoot.querySelector('#story');
         story.style.display = 'none';
+
+        clearInterval(this.interval);
     }
     
     parseOpenStories (url) {
@@ -178,6 +167,20 @@ class Stories extends HTMLElement {
                 return [openStoryImages, openStories];
             });
         })
+    }
+
+    autoScrollListener () {
+        var auto_scroll_duration = 5;
+        
+        if (this.getAttribute("auto-scroll")) {
+            auto_scroll_duration = this.getAttribute("auto-scroll");
+        }
+
+        var interval = setInterval(() => {
+            this.transition(featuredImage);
+        }, auto_scroll_duration * 1000);
+
+        this.interval = interval;
     }
 }
 
